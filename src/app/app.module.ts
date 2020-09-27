@@ -3,16 +3,35 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ListComponent } from './components/list/list.component';
+import { AddComponent } from './components/add/add.component';
+import { EditComponent } from './components/edit/edit.component';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import {HttpService} from "./services/http.service"
+import {WoocommerceService} from "./services/woocommerce.service"
+import {ProductService} from "./services/product.service";
+import { AddVarComponent } from './components/add-var/add-var.component'
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ListComponent,
+    AddComponent,
+    EditComponent,
+    AddVarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    HttpService,
+    WoocommerceService,
+    ProductService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

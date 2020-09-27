@@ -1,0 +1,85 @@
+<div>
+    <div class="row">
+      <div class="col-md-3">
+        <span *ngFor="let item of tags">
+          <span (click)="selectedTags.push(item)"> {{item.name}}, </span>
+        </span>
+        <span (click)="selectedTags=[]">Clear</span>
+      </div>
+      <div class="col-md-3">
+        <span *ngFor="let item of categories">
+          <span (click)="selectedCat.push(item)"> {{item.name}}, </span>
+        </span>
+        <span (click)="selectedCat=[]">Clear</span>
+      </div>
+      <div class="col-md-3">
+        <span *ngFor="let item of attributes">
+          <span (click)="selectedAttr = item"> {{item.name}}, </span>
+        </span>
+        <span (click)="selectedAttr=[]">Clear</span>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+          <textarea type="text" [(ngModel)]="product.name" class="form-control" placeholder="Name" >
+          </textarea>
+        </div>
+        <div class="col-md-4">
+          <textarea type="text" [(ngModel)]="product.description" class="form-control" placeholder="Description"
+          (change)="product.short_description = product.description"></textarea>
+      </div>
+      <div class="col-md-4">
+          <textarea type="text" [(ngModel)]="product.short_description" class="form-control" placeholder="Short description"></textarea>
+      </div>
+    </div>
+    <table class="table">
+      <thead>
+        <tr>
+         
+          <th scope="col">type</th>
+          <th scope="col">Regular Price</th>
+          <th scope="col">Sale Price</th>
+          <th scope="col">Weight</th>
+          <th scope="col">Category</th>
+          <th scope="col">Tags</th>
+          <th scope="col">Images</th>
+          <th scope="col">Send</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{product.type}}
+             </td>
+          <td><input type="text" [(ngModel)]="product.regular_price" class="form-control">
+          </td>
+          <td>
+           <input type="text" [(ngModel)]="product.sale_price" class="form-control">
+          </td>
+          <td><input type="text" [(ngModel)]="product.weight" class="form-control"></td>
+          <td> <span *ngFor="let item of selectedCat">
+              <span> {{item.name}}, </span>
+            </span>
+          </td>
+          <td> <span *ngFor="let item of selectedTags">
+              <span> {{item.name}}, </span>
+            </span></td>
+          <td><input type="file" class="form-control"
+              (change)="addProducts($event.target.files)"></td>
+          <td><a (click)="addProducts()">Send</a></td>
+        </tr>
+  
+      </tbody>
+    </table>
+    <div *ngIf="selectedAttr">
+        <span *ngFor="let item of selectedAttr.options">
+            {{item}} 
+        </span>
+        <input type="text" (change)="selectedAttr.options.push($event.target.value)">
+
+    </div>
+    <div *ngIf="savedProd">
+        <span> Product saved {{product.id}}</span>
+        <a href="link" target="_blank">{{link}}</a>
+    </div>
+  </div>
+  
