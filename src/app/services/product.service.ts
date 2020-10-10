@@ -4,7 +4,7 @@ import { HttpService } from './http.service';
 import { Tags} from '../model/tags'
 import { Attributes} from '../model/attributes'
 import { Image, MediaResponse} from '../model/images'
-import { Products } from '../model/product';
+import { Products, ProductVar } from '../model/product';
 import { mergeMap } from 'rxjs/operators';
 
 @Injectable({
@@ -48,8 +48,23 @@ export class ProductService {
     );
   }
 
-  addProductVar(id:string,prod:Products):Observable<Products>{
-    return this.http.post<Products>("/products/"+id+"/variations",prod);
+  addProductVarMedia(id:number,prod:ProductVar,file?:File):Observable<ProductVar>{
+    if(file){
+      return this.uploadMedia(file).pipe(
+        mergeMap((media:MediaResponse) => {
+          console.log(media);
+          let img= new Image();
+          img.src = media.source_url;
+          prod.image = (img);
+          return this.addProductVar(id,prod);
+        })
+      );
+    } else
+    return this.addProductVar(id,prod);
+  }
+
+  addProductVar(id:number,prod:ProductVar):Observable<ProductVar>{
+    return this.http.post<ProductVar>("/products/"+id+"/variations",prod);
   }
 
 }

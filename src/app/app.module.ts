@@ -11,7 +11,8 @@ import { FormsModule } from '@angular/forms';
 import {HttpService} from "./services/http.service"
 import {WoocommerceService} from "./services/woocommerce.service"
 import {ProductService} from "./services/product.service";
-import { AddVarComponent } from './components/add-var/add-var.component'
+import { AddVarComponent } from './components/add-var/add-var.component';
+import { NavComponent } from './components/nav/nav.component'
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AddVarComponent } from './components/add-var/add-var.component'
     ListComponent,
     AddComponent,
     EditComponent,
-    AddVarComponent
+    AddVarComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

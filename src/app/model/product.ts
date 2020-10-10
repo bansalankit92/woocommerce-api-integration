@@ -4,6 +4,7 @@ import {
 import {
   Image
 } from "./images"
+import { Attributes, SingleAttribute } from './attributes';
 
 export class Products {
   id: number;
@@ -28,8 +29,8 @@ export class Products {
   categories: Tags[] = [];
   tags: Tags[] = [];
   images: Image[] = [];
-  attributes: [] = [];
-  default_attributes: [] = [];
+  attributes:Attributes [] = [];
+  default_attributes: SingleAttribute [] = [];
   variations: [] = [];
 
 }
@@ -37,10 +38,6 @@ export class Products {
 
 export class ProductVar{
     id: number;
-    name: string;
-    slug: string;
-    description: string;
-    short_description: string;
     sku: string;
     regular_price: string;
     sale_price: string;
@@ -52,5 +49,5 @@ export class ProductVar{
     backorders = "no";
     weight: string = "1";
     image: Image;
-    attributes: [] = [];
+    attributes: SingleAttribute[] = [];
 }

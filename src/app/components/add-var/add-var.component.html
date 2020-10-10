@@ -2,19 +2,19 @@
     <div class="row">
       <div class="col-md-3">
         <span *ngFor="let item of tags">
-          <span (click)="selectedTags.push(item)"> {{item.name}}, </span>
+          <span (click)="selectedTags.push(item)"> {{item.name}},&nbsp;</span>
         </span>
         <span (click)="selectedTags=[]">Clear</span>
       </div>
       <div class="col-md-3">
         <span *ngFor="let item of categories">
-          <span (click)="selectedCat.push(item)"> {{item.name}}, </span>
+          <span (click)="selectedCat.push(item)"> {{item.name}}, &nbsp;</span>
         </span>
         <span (click)="selectedCat=[]">Clear</span>
       </div>
       <div class="col-md-3">
         <span *ngFor="let item of attributes">
-          <span (click)="selectedAttr = item"> {{item.name}}, </span>
+          <span (click)="selectedAttr = item; selectedAttr.options=[]"> {{item.name}},&nbsp; </span>
         </span>
         <span (click)="selectedAttr=[]">Clear</span>
       </div>
@@ -71,6 +71,7 @@
       </tbody>
     </table>
     <div *ngIf="selectedAttr">
+        {{selectedAttr.name}}
         <span *ngFor="let item of selectedAttr.options">
             {{item}} 
         </span>
@@ -80,6 +81,41 @@
     <div *ngIf="savedProd">
         <span> Product saved {{product.id}}</span>
         <a href="link" target="_blank">{{link}}</a>
+
+        <div *ngFor="let item of productsVar">
+            <hr>
+            <table class="table">
+                <thead>
+                  <tr>
+                   
+                    <th scope="col">Option</th>
+                    <th scope="col">Regular Price</th>
+                    <th scope="col">Sale Price</th>
+                    <th scope="col">Weight</th>
+        
+                    <th scope="col">Images</th>
+                    <th scope="col">Send</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{item.attributes[0].name }} {{item.attributes[0].option }}
+                       </td>
+                    <td><input type="text" [(ngModel)]="product.regular_price" class="form-control">
+                    </td>
+                    <td>
+                     <input type="text" [(ngModel)]="product.sale_price" class="form-control">
+                    </td>
+                    <td><input type="text" [(ngModel)]="product.weight" class="form-control"></td>
+                   
+                    <td><input type="file" class="form-control"
+                        (change)="addProductVar(item,$event.target.files)"></td>
+                    <td><a (click)="addProductVar(item)">Send</a></td>
+                  </tr>
+            
+                </tbody>
+              </table>
+        </div>
     </div>
   </div>
   
